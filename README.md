@@ -30,3 +30,5 @@ requests.switchToWindow(match);//切换不同的窗口
 TrackGenerator滑动轨迹生成
 * 所需驱动下载<br>
 已经上传到百度云,链接: https://pan.baidu.com/s/1yrnWRWLg4ab9lJGiZMFpyg 提取码: xdbg
+* 配置驱动<br>
+使用时,需要把对应路径的驱动配置到path.properties
