@@ -26,5 +26,7 @@ requests.sendKeysToInput(xpathOrCssSelector, sendKeys);//填写数据到对应�
 requests.switchToFrame();//切换到iframe
 requests.switchToWindow(match);//切换不同的窗口
 ```
-* 辅助类说明
+* 辅助类说明<br>
 TrackGenerator滑动轨迹生成
+* 所需驱动下载<br>
+已经上传到百度云,链接: https://pan.baidu.com/s/1yrnWRWLg4ab9lJGiZMFpyg 提取码: xdbg
