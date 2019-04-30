@@ -17,23 +17,23 @@ import com.lexlang.SeleniumRequests.util.PathCfg;
 */
 public class PhantomjsRequests  extends SeleniumRequests{
 	
-	public static PhantomjsRequests getHeadlessSelenium(){
+	public static SeleniumRequests getHeadlessSelenium(){
 		return new PhantomjsRequests(TIME_OUT,null);
 	}
 	
-	public static PhantomjsRequests getHeadlessSelenium(ProxyPara proxy){
+	public static SeleniumRequests getHeadlessSelenium(ProxyPara proxy){
 		return new PhantomjsRequests(TIME_OUT,proxy);
 	}
 	
-	public static PhantomjsRequests getHeadlessSelenium(int timeout){
+	public static SeleniumRequests getHeadlessSelenium(int timeout){
 		return new PhantomjsRequests(timeout,null);
 	}
 	
-	public static PhantomjsRequests getHeadlessSelenium(int timeout,ProxyPara proxy){
+	public static SeleniumRequests getHeadlessSelenium(int timeout,ProxyPara proxy){
 		return new PhantomjsRequests(timeout,proxy);
 	}
 	
-	public static PhantomjsRequests getHeadlessSelenium(ProxyPara proxy,int timeout){
+	public static SeleniumRequests getHeadlessSelenium(ProxyPara proxy,int timeout){
 		return new PhantomjsRequests(timeout,proxy);
 	}
 	

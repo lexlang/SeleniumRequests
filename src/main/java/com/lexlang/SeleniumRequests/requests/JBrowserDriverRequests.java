@@ -16,43 +16,43 @@ import com.machinepublishers.jbrowserdriver.Settings.Builder;
 */
 public class JBrowserDriverRequests extends SeleniumRequests {
 	
-	public static JBrowserDriverRequests getSelenium(){
+	public static SeleniumRequests getSelenium(){
 		return new JBrowserDriverRequests(TIME_OUT,null,false);
 	}
 	
-	public static JBrowserDriverRequests getSelenium(ProxyPara proxy){
+	public static SeleniumRequests getSelenium(ProxyPara proxy){
 		return new JBrowserDriverRequests(TIME_OUT,proxy,false);
 	}
 	
-	public static JBrowserDriverRequests getSelenium(int timeout){
+	public static SeleniumRequests getSelenium(int timeout){
 		return new JBrowserDriverRequests(timeout,null,false);
 	}
 	
-	public static JBrowserDriverRequests getSelenium(int timeout,ProxyPara proxy){
+	public static SeleniumRequests getSelenium(int timeout,ProxyPara proxy){
 		return new JBrowserDriverRequests(timeout,proxy,false);
 	}
 	
-	public static JBrowserDriverRequests getSelenium(ProxyPara proxy,int timeout){
+	public static SeleniumRequests getSelenium(ProxyPara proxy,int timeout){
 		return new JBrowserDriverRequests(timeout,proxy,false);
 	}
 	
-	public static JBrowserDriverRequests getHeadlessSelenium(){
+	public static SeleniumRequests getHeadlessSelenium(){
 		return new JBrowserDriverRequests(TIME_OUT,null,true);
 	}
 	
-	public static JBrowserDriverRequests getHeadlessSelenium(ProxyPara proxy){
+	public static SeleniumRequests getHeadlessSelenium(ProxyPara proxy){
 		return new JBrowserDriverRequests(TIME_OUT,proxy,true);
 	}
 	
-	public static JBrowserDriverRequests getHeadlessSelenium(int timeout){
+	public static SeleniumRequests getHeadlessSelenium(int timeout){
 		return new JBrowserDriverRequests(timeout,null,true);
 	}
 	
-	public static JBrowserDriverRequests getHeadlessSelenium(int timeout,ProxyPara proxy){
+	public static SeleniumRequests getHeadlessSelenium(int timeout,ProxyPara proxy){
 		return new JBrowserDriverRequests(timeout,proxy,true);
 	}
 	
-	public static JBrowserDriverRequests getHeadlessSelenium(ProxyPara proxy,int timeout){
+	public static SeleniumRequests getHeadlessSelenium(ProxyPara proxy,int timeout){
 		return new JBrowserDriverRequests(timeout,proxy,true);
 	}
 	

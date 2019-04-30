@@ -23,43 +23,43 @@ public class ChromeRequests extends SeleniumRequests {
 		System.setProperty("webdriver.chrome.driver",path);
 	}
 	
-	public static ChromeRequests getSelenium(){
+	public static SeleniumRequests getSelenium(){
 		return new ChromeRequests(TIME_OUT,null,false);
 	}
 	
-	public static ChromeRequests getSelenium(ProxyPara proxy){
+	public static SeleniumRequests getSelenium(ProxyPara proxy){
 		return new ChromeRequests(TIME_OUT,proxy,false);
 	}
 	
-	public static ChromeRequests getSelenium(int timeout){
+	public static SeleniumRequests getSelenium(int timeout){
 		return new ChromeRequests(timeout,null,false);
 	}
 	
-	public static ChromeRequests getSelenium(int timeout,ProxyPara proxy){
+	public static SeleniumRequests getSelenium(int timeout,ProxyPara proxy){
 		return new ChromeRequests(timeout,proxy,false);
 	}
 	
-	public static ChromeRequests getSelenium(ProxyPara proxy,int timeout){
+	public static SeleniumRequests getSelenium(ProxyPara proxy,int timeout){
 		return new ChromeRequests(timeout,proxy,false);
 	}
 	
-	public static ChromeRequests getHeadlessSelenium(){
+	public static SeleniumRequests getHeadlessSelenium(){
 		return new ChromeRequests(TIME_OUT,null,true);
 	}
 	
-	public static ChromeRequests getHeadlessSelenium(ProxyPara proxy){
+	public static SeleniumRequests getHeadlessSelenium(ProxyPara proxy){
 		return new ChromeRequests(TIME_OUT,proxy,true);
 	}
 	
-	public static ChromeRequests getHeadlessSelenium(int timeout){
+	public static SeleniumRequests getHeadlessSelenium(int timeout){
 		return new ChromeRequests(timeout,null,true);
 	}
 	
-	public static ChromeRequests getHeadlessSelenium(int timeout,ProxyPara proxy){
+	public static SeleniumRequests getHeadlessSelenium(int timeout,ProxyPara proxy){
 		return new ChromeRequests(timeout,proxy,true);
 	}
 	
-	public static ChromeRequests getHeadlessSelenium(ProxyPara proxy,int timeout){
+	public static SeleniumRequests getHeadlessSelenium(ProxyPara proxy,int timeout){
 		return new ChromeRequests(timeout,proxy,true);
 	}
 	

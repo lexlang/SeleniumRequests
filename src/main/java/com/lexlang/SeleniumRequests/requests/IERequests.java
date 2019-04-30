@@ -20,23 +20,23 @@ public class IERequests extends SeleniumRequests {
 		System.setProperty("webdriver.ie.driver",path);
 	}
 	
-	public static IERequests getSelenium(){
+	public static SeleniumRequests getSelenium(){
 		return new IERequests(TIME_OUT,null);
 	}
 	
-	public static IERequests getSelenium(ProxyPara proxy){
+	public static SeleniumRequests getSelenium(ProxyPara proxy){
 		return new IERequests(TIME_OUT,proxy);
 	}
 	
-	public static IERequests getSelenium(int timeout){
+	public static SeleniumRequests getSelenium(int timeout){
 		return new IERequests(timeout,null);
 	}
 	
-	public static IERequests getSelenium(ProxyPara proxy,int timeout){
+	public static SeleniumRequests getSelenium(ProxyPara proxy,int timeout){
 		return new IERequests(timeout,proxy);
 	}
 	
-	public static IERequests getSelenium(int timeout,ProxyPara proxy){
+	public static SeleniumRequests getSelenium(int timeout,ProxyPara proxy){
 		return new IERequests(timeout,proxy);
 	}
 	
