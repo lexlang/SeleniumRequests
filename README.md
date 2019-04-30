@@ -1,7 +1,7 @@
 # SeleniumRequests
 ## 简介
 本工具整理Chrome IE phantomjs JbrowerDriver等selenium浏览器集合
-##使用方法
+## 使用方法
 * 构造器为静态方法,无显示构造器,分为无头有头模式,可选参数为超时时间和代理
 ```Java
 SeleniumRequests requests = ChromeRequests.getSelenium(new ProxyPara("127.0.0.1",8080));//有头模式,设置代理
