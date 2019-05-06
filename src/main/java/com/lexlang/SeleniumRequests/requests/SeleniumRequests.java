@@ -313,6 +313,14 @@ public abstract class SeleniumRequests {
 		return getDriver().getPageSource();
 	}
     
+	/**
+	 * 获得文档
+	 * @return
+	 */
+	public Document getDocument(){
+		return Jsoup.parse(UrlUtils.fixAllRelativeHrefs(getCurrentSource(), getCurrentUrl()));
+	}
+	
 	
 	/**
 	 * 等待某个元素出现
