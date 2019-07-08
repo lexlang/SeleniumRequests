@@ -61,7 +61,7 @@ public class JBrowserDriverRequests extends SeleniumRequests {
 		Builder setting = Settings.builder()
                 .timezone(Timezone.ASIA_SHANGHAI)
                 .csrf()//跨域访问
-                .headless(false)//是否需要界面
+                .headless(headless)//是否需要界面
                 .javascript(true)//js是否执行
                 .loggerLevel(Level.ALL)
                 .logWarnings(true)

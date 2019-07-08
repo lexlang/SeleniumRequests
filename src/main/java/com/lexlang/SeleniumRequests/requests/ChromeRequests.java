@@ -90,8 +90,8 @@ public class ChromeRequests extends SeleniumRequests {
 	
     public void close(){
     	super.close();
-    	try {Runtime.getRuntime().exec("taskkill /f /im chrome.exe");} catch (IOException e) {}
-    	try {Runtime.getRuntime().exec("taskkill /f /im chromedriver.exe");} catch (IOException e) {}
+    	//try {Runtime.getRuntime().exec("taskkill /f /im chrome.exe");} catch (IOException e) {}
+    	//try {Runtime.getRuntime().exec("taskkill /f /im chromedriver.exe");} catch (IOException e) {}
     }
 	
 }
