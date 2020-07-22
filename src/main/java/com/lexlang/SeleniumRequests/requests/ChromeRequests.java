@@ -72,9 +72,10 @@ public class ChromeRequests extends SeleniumRequests {
 	        options.addArguments("--disable-gpu");
 	        options.addArguments("--no-sandbox");
 	        options.addArguments("--start-maximized");
+	        options.setExperimentalOption("excludeSwitches", Arrays.asList("enable-automation"));
 	        desiredCapabilities.setCapability(ChromeOptions.CAPABILITY, options);
 	    }
-
+	    
 	    //屏蔽测试代码
 	    String[] switches = {"--ignore-certificate-errors"};
 	    desiredCapabilities.setCapability("chrome.switches", Arrays.asList(switches));
