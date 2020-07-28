@@ -12,7 +12,7 @@ import java.util.Properties;
 * 
 */
 public class PathCfg {
-	private static String chromePath;
+	private static String winchromePath;
 	private static String iePath;
 	private static String phantomjsPath;
 	
@@ -22,7 +22,7 @@ public class PathCfg {
             InputStream in = new BufferedInputStream (new FileInputStream("path.properties"));
             pps.load(in);
             in.close();
-            chromePath=pps.getProperty("chromePath");
+            winchromePath=pps.getProperty("winchromePath");
             iePath=pps.getProperty("iePath");
             phantomjsPath=pps.getProperty("phantomjsPath");
         } catch (IOException e) {
@@ -30,8 +30,8 @@ public class PathCfg {
         }
 	}
 	
-	public static String getChromePath(){
-		return chromePath;
+	public static String getWinChromePath(){
+		return winchromePath;
 	}
 	
 	public static String getIEPath(){

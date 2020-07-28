@@ -19,8 +19,25 @@ import com.lexlang.SeleniumRequests.util.PathCfg;
 public class ChromeRequests extends SeleniumRequests {
 	
 	static{
-		String path=PathCfg.getChromePath();
-		System.setProperty("webdriver.chrome.driver",path);
+		if(isWinOS()){
+			String path=PathCfg.getWinChromePath();
+			System.setProperty("webdriver.chrome.driver",path);
+		}else{
+		    //linux安装环境
+			//chrome安装位置
+	        System.setProperty("webdriver.chrome.bin", "/opt/google/chrome/chrome");
+	        //chromederiver存放位置
+	        System.setProperty("webdriver.chrome.driver","/usr/bin/chromedriver");
+		}
+	}
+	
+	private static boolean isWinOS(){
+		 boolean isWindowsOS = false;
+		    String osName = System.getProperty("os.name");
+		    if(osName.toLowerCase().indexOf("windows")>-1){
+		      isWindowsOS = true;
+		    }
+	     return isWindowsOS;
 	}
 	
 	public static SeleniumRequests getSelenium(){
