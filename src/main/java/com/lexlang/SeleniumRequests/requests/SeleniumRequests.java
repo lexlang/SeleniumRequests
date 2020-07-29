@@ -44,6 +44,7 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 
 import com.lexlang.SeleniumRequests.proxy.ProxyPara;
 import com.lexlang.SeleniumRequests.responses.Response;
+import com.lexlang.SeleniumRequests.util.CheckOS;
 import com.lexlang.SeleniumRequests.util.PostGetJS;
 import com.lexlang.SeleniumRequests.util.UrlUtils;
 
@@ -424,7 +425,11 @@ public abstract class SeleniumRequests {
      * 关闭浏览器
      */
     public void close(){
-    	driver.quit();
+    	if(CheckOS.isWinOS()){
+    		driver.quit();
+    	}else{
+    		driver.close();
+    	}
     }
     
 	/**

@@ -9,6 +9,7 @@ import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 import com.lexlang.SeleniumRequests.proxy.ProxyPara;
+import com.lexlang.SeleniumRequests.util.CheckOS;
 import com.lexlang.SeleniumRequests.util.PathCfg;
 
 /**
@@ -19,7 +20,7 @@ import com.lexlang.SeleniumRequests.util.PathCfg;
 public class ChromeRequests extends SeleniumRequests {
 	
 	static{
-		if(isWinOS()){
+		if(CheckOS.isWinOS()){
 			String path=PathCfg.getWinChromePath();
 			System.setProperty("webdriver.chrome.driver",path);
 		}else{
@@ -31,14 +32,7 @@ public class ChromeRequests extends SeleniumRequests {
 		}
 	}
 	
-	private static boolean isWinOS(){
-		 boolean isWindowsOS = false;
-		    String osName = System.getProperty("os.name");
-		    if(osName.toLowerCase().indexOf("windows")>-1){
-		      isWindowsOS = true;
-		    }
-	     return isWindowsOS;
-	}
+
 	
 	public static SeleniumRequests getSelenium(){
 		return new ChromeRequests(TIME_OUT,null,false);
@@ -81,28 +75,37 @@ public class ChromeRequests extends SeleniumRequests {
 	}
 	
 	private ChromeRequests(int timeout,ProxyPara proxy,boolean headless){
-	    DesiredCapabilities desiredCapabilities = DesiredCapabilities.chrome();
-	    
-	    if(headless){
-		    ChromeOptions options = new ChromeOptions();
-	        options.addArguments("--headless");
-	        options.addArguments("--disable-gpu");
-	        options.addArguments("--no-sandbox");
-	        options.addArguments("--start-maximized");
-	        options.setExperimentalOption("excludeSwitches", Arrays.asList("enable-automation"));
-	        desiredCapabilities.setCapability(ChromeOptions.CAPABILITY, options);
-	    }
-	    
-	    //屏蔽测试代码
-	    String[] switches = {"--ignore-certificate-errors"};
-	    desiredCapabilities.setCapability("chrome.switches", Arrays.asList(switches));
-	    desiredCapabilities.setCapability (CapabilityType.ACCEPT_SSL_CERTS, true);
-
-		if(proxy!=null){ //手工指定一个代理
-			setProxy(desiredCapabilities,proxy);
-		}
 		
-	    driver = new ChromeDriver(desiredCapabilities); 
+		if(CheckOS.isWinOS()){
+		    DesiredCapabilities desiredCapabilities = DesiredCapabilities.chrome();
+		    
+		    if(headless){
+			    ChromeOptions options = new ChromeOptions();
+		        options.addArguments("--headless");
+		        options.addArguments("--disable-gpu");
+		        options.addArguments("--no-sandbox");
+		        options.addArguments("--start-maximized");
+		        options.setExperimentalOption("excludeSwitches", Arrays.asList("enable-automation"));
+		        desiredCapabilities.setCapability(ChromeOptions.CAPABILITY, options);
+		    }
+		    
+		    //屏蔽测试代码
+		    String[] switches = {"--ignore-certificate-errors"};
+		    desiredCapabilities.setCapability("chrome.switches", Arrays.asList(switches));
+		    desiredCapabilities.setCapability (CapabilityType.ACCEPT_SSL_CERTS, true);
+
+			if(proxy!=null){ //手工指定一个代理
+				setProxy(desiredCapabilities,proxy);
+			}
+			
+		    driver = new ChromeDriver(desiredCapabilities); 
+		}else{
+			ChromeOptions options = new ChromeOptions();
+			options.addArguments("headless");
+			options.addArguments("no-sandbox");
+			driver = new ChromeDriver(options);
+		}
+			    
 	    setTimeOut(driver,timeout);
 	}
 	
