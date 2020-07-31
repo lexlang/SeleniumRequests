@@ -111,7 +111,18 @@ public class ChromeRequests extends SeleniumRequests {
 	
     public void close(){
     	super.close();
-    	//try {Runtime.getRuntime().exec("taskkill /f /im chrome.exe");} catch (IOException e) {}
+    	if(CheckOS.isWinOS()){
+    		try {Runtime.getRuntime().exec("taskkill /f /im chrome.exe");} catch (IOException e) {}
+    	}else{
+    		try {
+    			String[] cmd = { "/bin/sh", "-c", "ps aux |grep chrome|awk '{print $2}'|xargs -i kill {}"};
+    			Process p = Runtime.getRuntime().exec(cmd);
+				p.waitFor();
+    		} catch (IOException e) {}
+    		catch (InterruptedException ex) {}
+		
+    	}
+    	//
     	//try {Runtime.getRuntime().exec("taskkill /f /im chromedriver.exe");} catch (IOException e) {}
     }
 	
