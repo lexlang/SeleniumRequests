@@ -32,7 +32,21 @@ public class ChromeRequests extends SeleniumRequests {
 		}
 	}
 	
-
+	/**
+	 * 启动带插件的浏览器
+	 * @param loadExtension C:/Users/hp/Downloads/80helper v1.7/80helper v1.7
+	 * @return
+	 */
+	public static SeleniumRequests getLoadExtensionSelenium(String loadExtension){
+		return new ChromeRequests(loadExtension);
+	}
+	
+	private ChromeRequests(String loadExtension){
+	    ChromeOptions options = new ChromeOptions();
+	    //插件路径
+	    options.addArguments("load-extension="+loadExtension);
+	    driver = new ChromeDriver(options);
+	}
 	
 	public static SeleniumRequests getSelenium(){
 		return new ChromeRequests(TIME_OUT,null,false);
