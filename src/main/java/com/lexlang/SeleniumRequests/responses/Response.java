@@ -6,10 +6,13 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.apache.commons.codec.binary.Base64;
+import org.apache.http.NameValuePair;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
@@ -24,13 +27,40 @@ import com.lexlang.SeleniumRequests.util.UrlUtils;
 */
 public class Response {
 	
+	private List<NameValuePair> headers=new ArrayList<NameValuePair>();
 	private String content;
 	private String currentUrl;
 	
-	public Response(String content,String currentUrl){
+	public Response(String content,String currentUrl,List<NameValuePair> headers){
 		this.content=content.replace("data:application/octet-stream;base64,", "");
+		this.currentUrl=currentUrl;
+		this.headers=headers;
 	}
 	
+	/**
+	 * 获得消息头
+	 * @return
+	 */
+    public List<NameValuePair> getHeaders(){
+    	return headers;
+    }
+	
+    /**
+     * 
+     * @param key
+     * @return
+     */
+    public String getHeaderValue(String key){
+    	List<NameValuePair> list = getHeaders();
+    	for(int i=0;i<list.size();i++){
+    		NameValuePair keyValue = list.get(i);
+    		if(keyValue.getName().toLowerCase().equals(key.toLowerCase())){
+    			return keyValue.getValue();
+    		}
+    	}
+    	return null;
+    }
+    
 	public Response(String content){
 		this.content=Base64.encodeBase64String(content.getBytes());
 	}
@@ -148,7 +178,7 @@ public class Response {
      * @return
      */
     public Document getDocument(){
-    	return Jsoup.parse(UrlUtils.fixAllRelativeHrefs(getContent().replace("&nbsp;", " "),currentUrl));
+    	return Jsoup.parse(getContent());
     }
     
 }

@@ -26,6 +26,8 @@ import javax.imageio.ImageIO;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
 
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -47,6 +49,8 @@ import org.openqa.selenium.remote.Augmenter;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.lexlang.SeleniumRequests.proxy.ProxyPara;
 import com.lexlang.SeleniumRequests.responses.Response;
 import com.lexlang.SeleniumRequests.util.CheckOS;
@@ -195,8 +199,23 @@ public abstract class SeleniumRequests {
 		executeJavaScript(ajax);
 		untilJsValueShow("window.getStreamFile");
 		String contentBase64=executeJavaScript("var result=window.getStreamFile;return result;").toString();
-		return new Response(contentBase64,url);
+		return new Response(contentBase64,url,extractHeader());
 	}
+	
+	public List<NameValuePair> extractHeader(){
+		JSONArray res = JSONArray.parseArray(executeJavaScript("var result=getHeader;return result;").toString());
+		List<NameValuePair> headers=new ArrayList<NameValuePair>();
+		for(int ind=0;ind<res.size();ind++){
+			JSONObject item = res.getJSONObject(ind);
+			Set<String> keys = item.keySet();
+			for(String key:keys){
+				NameValuePair hd=new BasicNameValuePair(key,item.getString(key));
+				headers.add(hd);
+			}
+		}
+		return headers;
+	}
+	
 	
 	/**
 	 * 简单post请求 Ajax
@@ -222,7 +241,7 @@ public abstract class SeleniumRequests {
 		executeJavaScript(ajax);
 		untilJsValueShow("window.getStreamFile");
 		String contentBase64=executeJavaScript("var result=window.getStreamFile;return result;").toString();
-		return new Response(contentBase64,url);
+		return new Response(contentBase64,url,extractHeader());
 	}
 	
 	/**
