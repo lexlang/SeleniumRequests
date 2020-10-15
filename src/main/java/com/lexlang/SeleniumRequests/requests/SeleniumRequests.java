@@ -1,5 +1,10 @@
 package com.lexlang.SeleniumRequests.requests;
 
+import java.awt.AWTException;
+import java.awt.Robot;
+import java.awt.Toolkit;
+import java.awt.datatransfer.StringSelection;
+import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.File;
@@ -163,7 +168,7 @@ public abstract class SeleniumRequests {
 	
 	public Response get(String url){
 		driver.get(url);
-		return new Response(getCurrentSource(),getCurrentUrl());
+		return new Response(getCurrentSource());
 	}
 	
 	/**
@@ -188,8 +193,9 @@ public abstract class SeleniumRequests {
 	public Response getUseHeaderAjax(String url,Map<String,String> headers) throws Exception{
 		String ajax = PostGetJS.postGetJS(url, "GET", headers, "");
 		executeJavaScript(ajax);
-		String content=executeJavaScript("var result=window.getContent;return result;").toString();
-		return new Response(content,url);
+		untilJsValueShow("window.getStreamFile");
+		String contentBase64=executeJavaScript("var result=window.getStreamFile;return result;").toString();
+		return new Response(contentBase64,url);
 	}
 	
 	/**
@@ -214,8 +220,23 @@ public abstract class SeleniumRequests {
 	public Response postUseHeaderAjax(String url,String data,Map<String,String> headers) throws Exception{
 		String ajax = PostGetJS.postGetJS(url, "POST", headers, data);
 		executeJavaScript(ajax);
-		String content=executeJavaScript("var result=window.getContent;return result;").toString();
-		return new Response(content,url);
+		untilJsValueShow("window.getStreamFile");
+		String contentBase64=executeJavaScript("var result=window.getStreamFile;return result;").toString();
+		return new Response(contentBase64,url);
+	}
+	
+	/**
+	 * 直到某值出现后运行
+	 * @param values
+	 */
+	private void untilJsValueShow(String values){
+		for(int i=0;i<TIME_OUT*5;i++){
+			String flag=executeJavaScript("var result="+values+"!=null;return result;").toString();
+			if(flag.equals("true")){
+				break;
+			}
+			interval();
+		}
 	}
 	
 
@@ -539,6 +560,45 @@ public abstract class SeleniumRequests {
         	//throw new RuntimeException("没有找到符合："+match+"的链接窗口");
         }
 	}
+	
+	/**
+	 * 上传文件
+	 * 先触发上传文件的对话框
+	 * @param filePath 文件的路径
+	 * @throws AWTException
+	 */
+	public void uploadFile(String filePath) throws AWTException{
+		StringSelection sel = new StringSelection(filePath);
+			 
+		Toolkit.getDefaultToolkit().getSystemClipboard().setContents(sel,null);
+		//System.out.println("selection" +sel);
+		
+		interval();
+		
+		// 新建一个Robot类的对象
+		Robot robot = new Robot();
+		interval();
+		         
+		// 按下回车
+		robot.keyPress(KeyEvent.VK_ENTER);
+		    
+		// 释放回车
+		robot.keyRelease(KeyEvent.VK_ENTER);
+		    
+		// 按下 CTRL+V
+		robot.keyPress(KeyEvent.VK_CONTROL);
+		robot.keyPress(KeyEvent.VK_V);
+		    
+		// 释放 CTRL+V
+		robot.keyRelease(KeyEvent.VK_CONTROL);
+		robot.keyRelease(KeyEvent.VK_V);
+		interval();
+		           
+		// 点击回车 Enter 
+		robot.keyPress(KeyEvent.VK_ENTER);
+		robot.keyRelease(KeyEvent.VK_ENTER);
+	}
+	
 	
 	/**
 	 * 向下滑动浏览器
