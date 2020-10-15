@@ -20,8 +20,11 @@ public class PostGetJS {
 	 */
 	public static String postGetJS(String url,String method,Map<String,String> headers,String postData){
 		StringBuilder sb=new StringBuilder();
+		sb.append("function blobToDataURL(blob) {var a = new FileReader();a.readAsDataURL(blob);a.onload = function (e) {window.getStreamFile = e.target.result;}}\n");
 		sb.append("var xmlhttp=new XMLHttpRequest();\n");
-		sb.append("xmlhttp.open(\""+method+"\",\""+url+"\",false);\n");
+		sb.append("xmlhttp.open(\""+method+"\",\""+url+"\",true);\n");
+		sb.append("xmlhttp.responseType = 'arraybuffer';\n");
+		sb.append("xmlhttp.onload=function(oEvent){var blob = new Blob([xmlhttp.response]);if (blob) {blobToDataURL(blob);}};\n");
 		if(headers!=null){
 			Set<String> keys = headers.keySet();
 			for(String key:keys){
@@ -33,7 +36,6 @@ public class PostGetJS {
 			}
 		}
 		sb.append("xmlhttp.send('"+postData+"');\n");
-		sb.append("window.getContent=xmlhttp.responseText;\n");
 		sb.append("var headers = xmlhttp.getAllResponseHeaders();\n");
 		sb.append("var arr = headers.trim().split(/[\\r\\n]+/);\n");
 		sb.append("var hd =[];\n");
