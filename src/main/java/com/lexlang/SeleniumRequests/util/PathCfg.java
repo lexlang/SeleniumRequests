@@ -15,6 +15,7 @@ public class PathCfg {
 	private static String winchromePath;
 	private static String iePath;
 	private static String phantomjsPath;
+	private static String firefoxPath;
 	
 	static{
 		Properties pps = new Properties();
@@ -25,6 +26,7 @@ public class PathCfg {
             winchromePath=pps.getProperty("winchromePath");
             iePath=pps.getProperty("iePath");
             phantomjsPath=pps.getProperty("phantomjsPath");
+            firefoxPath=pps.getProperty("firefoxPath");
         } catch (IOException e) {
         	e.printStackTrace();
         }
@@ -41,5 +43,10 @@ public class PathCfg {
 	public static String getPhantomjsPath(){
 		return phantomjsPath;
 	}
+	
+	public static String getFirefoxPath(){
+		return firefoxPath;
+	}
+	
 	
 }
