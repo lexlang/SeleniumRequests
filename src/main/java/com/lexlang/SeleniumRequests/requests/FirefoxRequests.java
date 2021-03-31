@@ -10,7 +10,7 @@ import com.lexlang.SeleniumRequests.util.PathCfg;
 public class FirefoxRequests extends SeleniumRequests{
 	
 	static{
-		String path=PathCfg.getIEPath();
+		String path=PathCfg.getFirefoxPath();
 		System.setProperty("webdriver.gecko.driver",path);
 	}
 	
